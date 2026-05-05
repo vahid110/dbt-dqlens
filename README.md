@@ -1,5 +1,8 @@
 # dbt-dqlens
 
+[![CI](https://github.com/vahid110/dbt-dqlens/actions/workflows/ci.yml/badge.svg)](https://github.com/vahid110/dbt-dqlens/actions/workflows/ci.yml)
+[![PyPI](https://img.shields.io/pypi/v/dbt-dqlens)](https://pypi.org/project/dbt-dqlens/)
+
 > Data quality for dbt, without writing tests.
 
 dbt-dqlens brings auto-generated data quality checks into your dbt project. It profiles your models, detects problems (null spikes, orphaned records, schema drift, outliers), and exposes findings as native dbt tests and a queryable model.
