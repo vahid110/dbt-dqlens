@@ -7,6 +7,13 @@ require-dbt-version: [">=1.0.0", "<3.0.0"]
 model-paths: ["models"]
 macro-paths: ["macros"]
 test-paths: ["tests"]
+seed-paths: ["seeds"]
+
+seeds:
+  dqlens:
+    dqlens_raw_findings:
+      +schema: "{{ var('dqlens', {}).get('dqlens_schema', 'dqlens') }}"
+      +tags: ['dqlens']
 
 vars:
   dqlens:

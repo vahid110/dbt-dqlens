@@ -151,13 +151,14 @@ def _generate_column_tests(
         and not col.is_primary_key
         and not col.is_unique
         and col.distinct_pct < 5
+        and col.most_common_values
     ):
-        # We'd need the actual values here. For now, generate a placeholder.
-        # The full implementation would sample values during profiling.
-        tests.append({
-            "accepted_values": {
-                "values": f"# {col.distinct_count} distinct values detected. Run dqlens to populate.",
-            }
-        })
+        values = [str(v[0]) for v in col.most_common_values if v[0] is not None]
+        if values:
+            tests.append({
+                "accepted_values": {
+                    "values": values,
+                }
+            })
 
     return tests

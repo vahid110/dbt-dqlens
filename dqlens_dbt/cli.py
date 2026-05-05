@@ -69,12 +69,25 @@ def profile(profile, target, schema, exclude, quick):
             quick=quick,
         )
 
-    # Save baseline
-    save_profile(db_profile)
+        # Save baseline
+        save_profile(db_profile)
+
+        # Run checks and write findings as seed CSV
+        from dqlens.baseline import load_previous_profile
+        from dqlens_dbt.findings_writer import run_checks_and_write_findings
+
+        previous = load_previous_profile()
+        findings_path = run_checks_and_write_findings(
+            profile=db_profile,
+            baseline=previous,
+            output_dir="seeds",
+            conn=conn,
+        )
 
     table_count = len(db_profile.tables)
     col_count = sum(len(t.columns) for t in db_profile.tables)
     click.echo(f"Profiled {table_count} tables, {col_count} columns.")
+    click.echo(f"Findings written to {findings_path}")
     click.echo("Run 'dqlens-dbt generate-tests' to create test YAML.")
 
 
