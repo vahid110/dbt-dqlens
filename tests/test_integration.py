@@ -86,6 +86,7 @@ class TestFullFlow:
         monkeypatch.setenv("DBT_PROFILES_DIR", str(work_dir))
 
         from click.testing import CliRunner
+
         from dqlens_dbt.cli import main
 
         runner = CliRunner()
@@ -101,6 +102,7 @@ class TestFullFlow:
         monkeypatch.setenv("DBT_PROFILES_DIR", str(work_dir))
 
         from click.testing import CliRunner
+
         from dqlens_dbt.cli import main
 
         runner = CliRunner()
@@ -137,6 +139,7 @@ class TestFullFlow:
         monkeypatch.setenv("DBT_PROFILES_DIR", str(work_dir))
 
         from click.testing import CliRunner
+
         from dqlens_dbt.cli import main
 
         runner = CliRunner()

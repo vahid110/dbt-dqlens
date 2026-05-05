@@ -7,7 +7,6 @@ from pathlib import Path
 from typing import Any
 
 import yaml
-
 from dqlens.models import ColumnProfile, DatabaseProfile, TableProfile
 
 

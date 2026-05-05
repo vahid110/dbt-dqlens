@@ -43,10 +43,10 @@ def profile(profile, target, schema, exclude, quick):
 
     # Import DQLens and run profiling
     try:
+        from dqlens.baseline import save_profile
         from dqlens.config import init_dqlens_dir
         from dqlens.connectors.factory import get_connector
         from dqlens.profiler_v2 import profile_database
-        from dqlens.baseline import save_profile
     except ImportError:
         click.echo(
             "Error: dqlens is not installed. Run: pip install dqlens",
@@ -74,6 +74,7 @@ def profile(profile, target, schema, exclude, quick):
 
         # Run checks and write findings as seed CSV
         from dqlens.baseline import load_previous_profile
+
         from dqlens_dbt.findings_writer import run_checks_and_write_findings
 
         previous = load_previous_profile()

@@ -4,8 +4,8 @@ import tempfile
 from pathlib import Path
 
 import yaml
-
 from dqlens.models import ColumnProfile, DatabaseProfile, TableProfile
+
 from dqlens_dbt.test_generator import generate_dbt_tests
 
 

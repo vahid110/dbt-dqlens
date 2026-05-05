@@ -6,10 +6,7 @@ from pathlib import Path
 import pytest
 import yaml
 
-from dqlens_dbt.dbt_config import (
-    get_target_config,
-    target_to_connection_url,
-)
+from dqlens_dbt.dbt_config import get_target_config, target_to_connection_url
 
 
 class TestTargetToConnectionUrl:
