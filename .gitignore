@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+
+# pytest
+.pytest_cache/
+
+# DQLens runtime artifacts (generated during tests)
+.dqlens/
+
+# NEVER commit real credentials
+# The test_project/profiles.yml in the repo is a dummy template.
+# Real profiles are generated at runtime in tmp dirs.
+**/profiles_real.yml
+**/.env
+**/*.env
+
+# dbt artifacts
+target/
+dbt_packages/
+logs/

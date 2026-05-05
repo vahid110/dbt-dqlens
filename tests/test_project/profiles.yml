@@ -1,0 +1,14 @@
+# Template only. Integration tests generate this dynamically from env vars.
+# See tests/test_integration.py for how this is populated at runtime.
+dqlens_test:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: localhost
+      port: 5432
+      user: test
+      password: test
+      dbname: test
+      schema: public
+      threads: 1

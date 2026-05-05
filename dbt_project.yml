@@ -1,0 +1,19 @@
+name: 'dqlens'
+version: '0.1.0'
+config-version: 2
+
+require-dbt-version: [">=1.0.0", "<3.0.0"]
+
+model-paths: ["models"]
+macro-paths: ["macros"]
+test-paths: ["tests"]
+
+vars:
+  dqlens:
+    # Schema where dqlens_findings model is materialized
+    dqlens_schema: "dqlens"
+    # Severity threshold: only store findings at this level or above
+    # Options: "LOW", "MEDIUM", "HIGH"
+    min_severity: "LOW"
+    # Tables to exclude from profiling (glob patterns)
+    exclude_tables: []
