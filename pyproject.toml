@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "dbt-dqlens"
-version = "0.1.0"
+version = "0.2.0"
 description = "Data quality for dbt, without writing tests. Auto-generates dbt tests from DQLens profiling."
 readme = "README.md"
 license = {text = "MIT"}
@@ -28,7 +28,7 @@ classifiers = [
     "Topic :: Software Development :: Testing",
 ]
 dependencies = [
-    "dqlens>=0.2.0",
+    "dqlens>=0.4.0",
     "click>=8.0",
     "pyyaml>=6.0",
 ]
