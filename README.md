@@ -24,7 +24,7 @@ packages:
 Then:
 
 ```bash
-pip install dqlens
+pip install dqlens[duckdb]   # or just: pip install dqlens (for PostgreSQL/MySQL/SQLite)
 dbt deps
 ```
 
@@ -126,8 +126,8 @@ vars:
 ## Requirements
 
 - dbt-core >= 1.0.0
-- Python with `dqlens` installed (`pip install dqlens`)
-- PostgreSQL, Snowflake, or BigQuery (PostgreSQL for MVP)
+- Python with `dqlens` installed (`pip install dqlens[duckdb]` for DuckDB)
+- Supported databases: PostgreSQL, DuckDB, SQLite, MySQL (Snowflake, BigQuery coming soon)
 
 ## License
 
