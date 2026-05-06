@@ -119,6 +119,10 @@ def target_to_connection_url(target: dict[str, Any]) -> str:
         path = target.get("database", "")
         return f"sqlite:///{path}"
 
+    elif db_type == "duckdb":
+        path = target.get("path", target.get("database", ""))
+        return f"duckdb:///{path}"
+
     elif db_type == "snowflake":
         account = target.get("account", "")
         user = target.get("user", "")
