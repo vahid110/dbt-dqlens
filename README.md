@@ -5,7 +5,7 @@
 
 > Data quality for dbt, without writing tests.
 
-dbt-dqlens brings auto-generated data quality checks into your dbt project. It profiles your models, detects problems (null spikes, orphaned records, schema drift, outliers), and exposes findings as native dbt tests and a queryable model.
+dbt-dqlens brings auto-generated data quality checks into your dbt project. It profiles your models, detects problems (null spikes, schema drift, empty strings, row count anomalies), and runs checks as native dbt tests.
 
 You don't write tests. DQLens writes them for you.
 
@@ -18,14 +18,44 @@ Add to your `packages.yml`:
 ```yaml
 packages:
   - package: vahid110/dbt_dqlens
-    version: 0.1.0
+    version: 0.2.0
 ```
 
 Then:
 
 ```bash
-pip install dqlens[duckdb]   # or just: pip install dqlens (for PostgreSQL/MySQL/SQLite)
 dbt deps
+```
+
+### 2. Profile your models
+
+```bash
+dbt run --select dqlens_profile_results
+```
+
+This profiles every table in your schema (null rates, distinct counts, empty strings, value ranges) and stores the results in your warehouse.
+
+### 3. Run checks
+
+```bash
+dbt test --select tag:dqlens
+```
+
+The catch-all test compares the current profile against the previous one and flags what changed. No configuration needed.
+
+### That's it.
+
+Two dbt commands. No CLI. No Python. No YAML to write. Everything stays inside dbt.
+
+## Alternative: CLI approach
+
+If you prefer a CLI workflow (e.g., for CI pipelines outside dbt):
+
+```bash
+pip install dbt-dqlens
+dqlens-dbt profile        # profiles models using your profiles.yml
+dqlens-dbt generate-tests # outputs _dqlens_tests.yml
+dbt test --select tag:dqlens
 ```
 
 ### 2. Profile your models
@@ -70,16 +100,14 @@ Your auto-generated tests run as native dbt tests. Failures show up in dbt docs,
 ## How it works
 
 ```
-dbt run                    (your models build as usual)
+dbt run --select dqlens_profile_results   (profiles all tables, stores in warehouse)
     |
-dqlens-dbt profile         (profiles the output tables using your profiles.yml)
-    |
-dqlens-dbt generate-tests  (auto-generates _dqlens_tests.yml)
-    |
-dbt test --select tag:dqlens  (runs the generated tests)
+dbt test --select tag:dqlens              (compares current vs baseline, flags changes)
 ```
 
-DQLens reads your dbt `profiles.yml` to connect to the same warehouse. No double configuration.
+On the first run, it profiles and stores a baseline. On subsequent runs, it compares against the previous profile and flags drift: null spikes, schema changes, row count anomalies, empty strings.
+
+No external tools. No file writing. Everything lives in your warehouse.
 
 ## The `dqlens_findings` model
 

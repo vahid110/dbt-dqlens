@@ -1,0 +1,6 @@
+version: 2
+
+models:
+  - name: dqlens_profile_results
+    tests:
+      - dqlens_check_all

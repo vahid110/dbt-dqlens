@@ -1,0 +1,13 @@
+# Dummy template. Real values injected at test time via env vars.
+dqlens_native_test:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: localhost
+      port: 5432
+      user: test
+      password: test
+      dbname: test
+      schema: public
+      threads: 1
