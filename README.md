@@ -33,15 +33,15 @@ dbt deps
 After `dbt run`, profile your warehouse:
 
 ```bash
-dbt run-operation dqlens_profile
+dqlens-dbt profile
 ```
 
-This connects to your warehouse (using your dbt profile), profiles every model, and stores baselines in a `_dqlens` schema.
+This reads your `profiles.yml`, connects to the same warehouse dbt uses, profiles every model, and stores baselines.
 
 ### 3. Generate tests
 
 ```bash
-dbt run-operation dqlens_generate_tests
+dqlens-dbt generate-tests
 ```
 
 This creates a `_dqlens_tests.yml` file with auto-generated tests for every model. Review it, commit it, done.
@@ -70,13 +70,13 @@ Your auto-generated tests run as native dbt tests. Failures show up in dbt docs,
 ## How it works
 
 ```
-dbt run                          (your models build as usual)
+dbt run                    (your models build as usual)
     |
-dbt run-operation dqlens_profile (DQLens profiles the output tables)
+dqlens-dbt profile         (profiles the output tables using your profiles.yml)
     |
-dbt run-operation dqlens_generate_tests  (auto-generates schema.yml tests)
+dqlens-dbt generate-tests  (auto-generates _dqlens_tests.yml)
     |
-dbt test --select tag:dqlens     (runs the generated tests)
+dbt test --select tag:dqlens  (runs the generated tests)
 ```
 
 DQLens reads your dbt `profiles.yml` to connect to the same warehouse. No double configuration.
