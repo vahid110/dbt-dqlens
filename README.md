@@ -18,7 +18,7 @@ Add to your `packages.yml`:
 ```yaml
 packages:
   - package: vahid110/dbt_dqlens
-    version: 0.2.0
+    version: [">=0.3.0", "<1.0.0"]
 ```
 
 Then:
